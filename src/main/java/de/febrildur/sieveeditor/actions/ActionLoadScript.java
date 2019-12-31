@@ -1,6 +1,5 @@
 package de.febrildur.sieveeditor.actions;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
@@ -11,13 +10,13 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.fluffypeople.managesieve.ParseException;
 import com.fluffypeople.managesieve.SieveScript;
 
 import de.febrildur.sieveeditor.Application;
-import de.febrildur.sieveeditor.ConnectAndListScripts;
+import de.febrildur.sieveeditor.system.ToString;
+import de.febrildur.sieveeditor.system.ToStringListCellRenderer;
 
 public class ActionLoadScript extends AbstractAction {
 
@@ -27,7 +26,7 @@ public class ActionLoadScript extends AbstractAction {
 		putValue("Name", "Load...");
 		this.parentFrame = parentFrame;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final JDialog frame = new JDialog(parentFrame, "Select Script", true);
@@ -42,6 +41,14 @@ public class ActionLoadScript extends AbstractAction {
 			panel.add(labelScript);
 			SieveScript[] liste = parentFrame.getServer().getListScripts().toArray(new SieveScript[0]);
 			JComboBox<SieveScript> tfScript = new JComboBox<SieveScript>(liste);
+			final ToString toString = new ToString() {
+				public String toString(final Object object) {
+					final SieveScript value = (SieveScript) object;
+					return value.getName();
+			    }
+			};
+			tfScript.setRenderer(new ToStringListCellRenderer(
+					tfScript.getRenderer(), toString));
 			panel.add(tfScript);
 			
 			JButton buttonOK = new JButton("OK");

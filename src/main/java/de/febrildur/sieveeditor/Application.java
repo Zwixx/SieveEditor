@@ -18,14 +18,18 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import com.fluffypeople.managesieve.ParseException;
 import com.fluffypeople.managesieve.SieveScript;
 
+import de.febrildur.sieveeditor.actions.ActionCheckScript;
 import de.febrildur.sieveeditor.actions.ActionConnect;
 import de.febrildur.sieveeditor.actions.ActionLoadScript;
+import de.febrildur.sieveeditor.actions.ActionSaveScript;
+import de.febrildur.sieveeditor.actions.ActionSaveScriptAs;
 
 public class Application extends JFrame {
 
 	private ConnectAndListScripts server;
 	private PropertiesSieve prop = new PropertiesSieve();
 	private RSyntaxTextArea textArea;
+	private SieveScript script;
 
 	public Application() {
 
@@ -42,6 +46,9 @@ public class Application extends JFrame {
 		
 		sieve.add(new JMenuItem(new ActionConnect(this)));
 		sieve.add(new JMenuItem(new ActionLoadScript(this)));
+		sieve.add(new JMenuItem(new ActionCheckScript(this)));
+		sieve.add(new JMenuItem(new ActionSaveScript(this)));
+		sieve.add(new JMenuItem(new ActionSaveScriptAs(this)));
 		
 		setJMenuBar(menu);
 		
@@ -83,6 +90,23 @@ public class Application extends JFrame {
 	}
 	
 	public void setScript(SieveScript script) throws IOException, ParseException {
+		this.script = script;
 		textArea.setText(server.getScript(script));
+	}
+	
+	public void save() {
+		save(script.getName());
+	}
+	
+	public void save(String name) {
+		try {
+			server.putScript(name, textArea.getText());
+		} catch (IOException | ParseException e) {
+			JOptionPane.showMessageDialog(this, e.getClass().getName() + ": " + e.getMessage());
+		}
+	}
+
+	public String getScriptText() {
+		return textArea.getText();
 	}
 }

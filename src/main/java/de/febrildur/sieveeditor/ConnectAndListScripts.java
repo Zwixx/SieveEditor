@@ -87,6 +87,11 @@ public class ConnectAndListScripts {
 		return ss.getBody();
 	}
 	
+	public String checkScript(String script) throws IOException, ParseException {
+		ManageSieveResponse resp = client.checkscript(script);
+		return resp.getMessage();
+	}
+	
 	public boolean isLoggedIn() {
 		return client != null;
 	}
