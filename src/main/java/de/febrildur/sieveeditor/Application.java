@@ -18,6 +18,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import com.fluffypeople.managesieve.ParseException;
 import com.fluffypeople.managesieve.SieveScript;
 
+import de.febrildur.sieveeditor.actions.ActionActivateDeactivateScript;
 import de.febrildur.sieveeditor.actions.ActionCheckScript;
 import de.febrildur.sieveeditor.actions.ActionConnect;
 import de.febrildur.sieveeditor.actions.ActionLoadScript;
@@ -45,6 +46,7 @@ public class Application extends JFrame {
 		menu.add(sieve);
 		
 		sieve.add(new JMenuItem(new ActionConnect(this)));
+		sieve.add(new JMenuItem(new ActionActivateDeactivateScript(this)));
 		sieve.add(new JMenuItem(new ActionLoadScript(this)));
 		sieve.add(new JMenuItem(new ActionCheckScript(this)));
 		sieve.add(new JMenuItem(new ActionSaveScript(this)));

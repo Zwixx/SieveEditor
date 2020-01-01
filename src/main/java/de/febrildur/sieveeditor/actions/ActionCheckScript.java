@@ -29,5 +29,4 @@ public class ActionCheckScript extends AbstractAction {
 			JOptionPane.showMessageDialog(parentFrame, e1.getMessage());
 		}
 	}
-
 }

@@ -1,7 +1,5 @@
 package de.febrildur.sieveeditor.actions;
 
-import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
