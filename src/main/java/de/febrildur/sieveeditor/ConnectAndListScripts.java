@@ -132,4 +132,18 @@ public class ConnectAndListScripts {
 			return null;
 		}
 	}
+
+	public void activateScript(String script) throws IOException, ParseException {
+		ManageSieveResponse resp = client.setactive(script);
+		if (!resp.isOk()) {
+			throw new IOException(resp.getMessage()); 
+		}
+	}
+	
+	public void deactivateScript() throws IOException, ParseException {
+		ManageSieveResponse resp = client.setactive("");
+		if (!resp.isOk()) {
+			throw new IOException(resp.getMessage()); 
+		}
+	}
 }
