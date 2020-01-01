@@ -75,8 +75,22 @@ public class ActionActivateDeactivateScript extends AbstractAction {
 				}
 				JOptionPane.showMessageDialog(parentFrame, "deactivate all scripts");
 			});
-			
 			popmen.add(deactivate);
+			
+			JMenuItem rename = new JMenuItem("rename...");
+			rename.addActionListener((event) -> {
+				try {
+					String script = rowData[table.getSelectedRow()][0];
+					String newName = JOptionPane.showInputDialog("Rename to:", script);
+					
+					parentFrame.getServer().rename(script, newName);
+				} catch (IOException | ParseException e1) {
+					JOptionPane.showMessageDialog(parentFrame, e1.getMessage());
+					return;
+				}
+				JOptionPane.showMessageDialog(parentFrame, "deactivate all scripts");
+			});
+			popmen.add(rename);
 			
 			table.addMouseListener(new MouseAdapter() {
 				public void mouseReleased(MouseEvent me) {

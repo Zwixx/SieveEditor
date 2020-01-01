@@ -146,4 +146,11 @@ public class ConnectAndListScripts {
 			throw new IOException(resp.getMessage()); 
 		}
 	}
+
+	public void rename(String script, String newName) throws IOException, ParseException {
+		ManageSieveResponse resp = client.renamescript(script, newName);
+		if (!resp.isOk()) {
+			throw new IOException(resp.getMessage()); 
+		}
+	}
 }
