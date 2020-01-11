@@ -1,9 +1,11 @@
 package de.febrildur.sieveeditor.actions;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -32,9 +34,12 @@ public class ActionLoadScript extends AbstractAction {
 		final JDialog frame = new JDialog(parentFrame, "Select Script", true);
 		try {
 			JPanel panel = new JPanel();
+			panel.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
+			GridLayout layout = new GridLayout(2, 2, 6, 6);
+			panel.setLayout(layout);
 
 			frame.getContentPane().add(panel);
-			frame.setSize(400, 200);
+			frame.setSize(400, 120);
 			frame.setLocationRelativeTo(parentFrame);
 			
 			JLabel labelScript = new JLabel("Script");

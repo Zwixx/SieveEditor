@@ -24,6 +24,8 @@ import de.febrildur.sieveeditor.actions.ActionConnect;
 import de.febrildur.sieveeditor.actions.ActionLoadScript;
 import de.febrildur.sieveeditor.actions.ActionSaveScript;
 import de.febrildur.sieveeditor.actions.ActionSaveScriptAs;
+import de.febrildur.sieveeditor.system.ConnectAndListScripts;
+import de.febrildur.sieveeditor.system.PropertiesSieve;
 
 public class Application extends JFrame {
 
@@ -110,5 +112,9 @@ public class Application extends JFrame {
 
 	public String getScriptText() {
 		return textArea.getText();
+	}
+
+	public Object getScriptName() {
+		return script.getName();
 	}
 }

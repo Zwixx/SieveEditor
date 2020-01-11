@@ -1,9 +1,11 @@
 package de.febrildur.sieveeditor.actions;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -14,7 +16,7 @@ import javax.swing.JTextField;
 import com.fluffypeople.managesieve.ParseException;
 
 import de.febrildur.sieveeditor.Application;
-import de.febrildur.sieveeditor.ConnectAndListScripts;
+import de.febrildur.sieveeditor.system.ConnectAndListScripts;
 
 public class ActionConnect extends AbstractAction {
 
@@ -28,6 +30,9 @@ public class ActionConnect extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
+		GridLayout layout = new GridLayout(5, 2, 6, 6);
+		panel.setLayout(layout);
 
 		final JDialog frame = new JDialog(parentFrame, "Connection", true);
 		frame.getContentPane().add(panel);

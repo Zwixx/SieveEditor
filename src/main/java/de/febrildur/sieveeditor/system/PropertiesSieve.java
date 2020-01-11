@@ -1,4 +1,4 @@
-package de.febrildur.sieveeditor;
+package de.febrildur.sieveeditor.system;
 
 import java.io.File;
 import java.io.FileInputStream;

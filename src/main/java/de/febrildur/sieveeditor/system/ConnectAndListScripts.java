@@ -1,4 +1,4 @@
-package de.febrildur.sieveeditor;
+package de.febrildur.sieveeditor.system;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
