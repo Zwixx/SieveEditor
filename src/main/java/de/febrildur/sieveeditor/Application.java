@@ -3,6 +3,7 @@ package de.febrildur.sieveeditor;
 import java.awt.BorderLayout;
 import java.io.IOException;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -33,6 +34,14 @@ public class Application extends JFrame {
 	private PropertiesSieve prop = new PropertiesSieve();
 	private RSyntaxTextArea textArea;
 	private SieveScript script;
+	
+	private AbstractAction actionConnect = new ActionConnect(this);
+	private AbstractAction actionActivateDeactivateScript = new ActionActivateDeactivateScript(this);
+	private AbstractAction actionLoadScript = new ActionLoadScript(this);
+	private AbstractAction actionCheckScript = new ActionCheckScript(this);
+	private AbstractAction actionSaveScript = new ActionSaveScript(this);
+	private AbstractAction actionSaveScriptAs = new ActionSaveScriptAs(this);
+ 
 
 	public Application() {
 
@@ -47,12 +56,12 @@ public class Application extends JFrame {
 		JMenu sieve = new JMenu("Sieve");
 		menu.add(sieve);
 		
-		sieve.add(new JMenuItem(new ActionConnect(this)));
-		sieve.add(new JMenuItem(new ActionActivateDeactivateScript(this)));
-		sieve.add(new JMenuItem(new ActionLoadScript(this)));
-		sieve.add(new JMenuItem(new ActionCheckScript(this)));
-		sieve.add(new JMenuItem(new ActionSaveScript(this)));
-		sieve.add(new JMenuItem(new ActionSaveScriptAs(this)));
+		sieve.add(new JMenuItem(actionConnect));
+		sieve.add(new JMenuItem(actionActivateDeactivateScript));
+		sieve.add(new JMenuItem(actionLoadScript));
+		sieve.add(new JMenuItem(actionCheckScript));
+		sieve.add(new JMenuItem(actionSaveScript));
+		sieve.add(new JMenuItem(actionSaveScriptAs));
 		
 		setJMenuBar(menu);
 		
@@ -66,11 +75,11 @@ public class Application extends JFrame {
 		cp.add(sp);
 
 		setContentPane(cp);
-		setTitle("Text Editor Demo");
+		setTitle("Sieve Editor");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
-
+		updateStatus();
 	}
 
 	public PropertiesSieve getProp() {
@@ -116,5 +125,14 @@ public class Application extends JFrame {
 
 	public Object getScriptName() {
 		return script.getName();
+	}
+	
+	public void updateStatus() {
+		actionConnect.setEnabled(true);
+		actionActivateDeactivateScript.setEnabled(server != null);
+		actionLoadScript.setEnabled(server != null);
+		actionCheckScript.setEnabled(server != null );
+		actionSaveScript.setEnabled(server != null && script != null);
+		actionSaveScriptAs.setEnabled(server != null);
 	}
 }

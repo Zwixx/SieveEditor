@@ -60,6 +60,7 @@ public class ActionLoadScript extends AbstractAction {
 			buttonOK.addActionListener((event) -> {
 				try {
 					parentFrame.setScript((SieveScript) tfScript.getSelectedItem());
+					parentFrame.updateStatus();
 					frame.setVisible(false);
 				} catch (NumberFormatException | IOException | ParseException e1) {
 					JOptionPane.showMessageDialog(frame, e1.getClass().getName() + ": " + e1.getMessage());

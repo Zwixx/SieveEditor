@@ -19,6 +19,7 @@ public class ActionSaveScript extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		parentFrame.save();
+		parentFrame.updateStatus();
 		JOptionPane.showMessageDialog(parentFrame, "Script saved.");
 	}
 

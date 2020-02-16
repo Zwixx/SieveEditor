@@ -28,6 +28,7 @@ public class ActionSaveScriptAs extends AbstractAction {
 
 		try {
 			parentFrame.save(newName);
+			parentFrame.updateStatus();
 		} catch (NumberFormatException e1) {
 			JOptionPane.showMessageDialog(parentFrame, e1.getClass().getName() + ": " + e1.getMessage());
 		}

@@ -69,6 +69,7 @@ public class ActionConnect extends AbstractAction {
 				parentFrame.getProp().setPassword(tfPassword.getText());
 				parentFrame.getServer().connect(parentFrame.getProp());
 				parentFrame.getProp().write();
+				parentFrame.updateStatus();
 				frame.setVisible(false);
 			} catch (NumberFormatException | IOException | ParseException e1) {
 				JOptionPane.showMessageDialog(frame, e1.getClass().getName() + ": " + e1.getMessage());
