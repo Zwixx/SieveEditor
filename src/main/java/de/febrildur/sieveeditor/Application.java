@@ -1,6 +1,7 @@
 package de.febrildur.sieveeditor;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.swing.AbstractAction;
@@ -10,6 +11,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -56,11 +58,11 @@ public class Application extends JFrame {
 		JMenu sieve = new JMenu("Sieve");
 		menu.add(sieve);
 		
-		sieve.add(new JMenuItem(actionConnect));
+		sieve.add(new JMenuItem(actionConnect)).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK));
 		sieve.add(new JMenuItem(actionActivateDeactivateScript));
-		sieve.add(new JMenuItem(actionLoadScript));
+		sieve.add(new JMenuItem(actionLoadScript)).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
 		sieve.add(new JMenuItem(actionCheckScript));
-		sieve.add(new JMenuItem(actionSaveScript));
+		sieve.add(new JMenuItem(actionSaveScript)).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
 		sieve.add(new JMenuItem(actionSaveScriptAs));
 		
 		setJMenuBar(menu);
