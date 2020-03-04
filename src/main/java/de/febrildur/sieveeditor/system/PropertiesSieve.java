@@ -8,8 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
+import org.jasypt.properties.EncryptableProperties;
+
 public class PropertiesSieve {
 
+	private final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
 	private String server;
 	private int port;
 	private String username;
@@ -21,27 +26,32 @@ public class PropertiesSieve {
 		File propFile = new File(propFileName);
 		propFile.createNewFile();
 		try (InputStream input = new FileInputStream(propFileName)) {
-			Properties prop = new Properties();
+			encryptor.setPassword("KNQ4VnqF24WLe4HZJ9fB9Sth");
+			Properties prop = new EncryptableProperties(encryptor);  
 
 			prop.load(input);
 
 			server = prop.getProperty("sieve.server", "");
 			port = Integer.valueOf(prop.getProperty("sieve.port", "4190"));
 			username = prop.getProperty("sieve.user", "");
-			password = prop.getProperty("sieve.password", "");
+			try {
+				password = prop.getProperty("sieve.password", "");
+			} catch (EncryptionOperationNotPossibleException e) {
+				password = "";
+			}
 		}
 	}
 
 	public void write() {
 		try (OutputStream output = new FileOutputStream(propFileName)) {
 
-			Properties prop = new Properties();
+			Properties prop = new EncryptableProperties(encryptor);
 
 			// set the properties value
 			prop.setProperty("sieve.server", server);
 			prop.setProperty("sieve.port", Integer.toString(port));
 			prop.setProperty("sieve.user", username);
-			prop.setProperty("sieve.password", password);
+			prop.setProperty("sieve.password", String.format("ENC(%s)", encryptor.encrypt(password)));
 
 			prop.store(output, null);
 
