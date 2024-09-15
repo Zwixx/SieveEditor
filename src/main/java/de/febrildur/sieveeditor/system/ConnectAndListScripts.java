@@ -114,24 +114,13 @@ public class ConnectAndListScripts {
 				}
 			} };
 
-			// Ignore differences between given hostname and certificate hostname
-			HostnameVerifier hv = new HostnameVerifier() {
-				@Override
-				public boolean verify(String hostname, SSLSession session) {
-					System.out.println(hostname);
-					return true;
-				}
-			};
-
 			SSLContext sc = SSLContext.getInstance("SSL");
 			sc.init(null, trustAllCerts, new SecureRandom());
 			return sc.getSocketFactory();
-		} catch (NoSuchAlgorithmException ex) {
-			return null;
-		} catch (KeyManagementException ex) {
+		} catch (NoSuchAlgorithmException | KeyManagementException ex) {
 			return null;
 		}
-	}
+    }
 
 	public void activateScript(String script) throws IOException, ParseException {
 		ManageSieveResponse resp = client.setactive(script);
